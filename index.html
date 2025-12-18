@@ -1,11 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      gap: 1rem;
+      background: #fafafa;
+      color: #111;
+    }
+    h1 { margin: 0.5rem 0; }
+    .video-wrap {
+      max-width: 100%;
+      width: 720px;
+      aspect-ratio: 16/9;
+      background: #000;
+      display: grid;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    button {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+      max-width: 720px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome</h1>
+  <div class="video-wrap" aria-hidden="false">
+    <!-- Official YouTube video ID: dQw4w9WgXcQ -->
+    <iframe
+      id="rickroll"
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+      title="Never Gonna Give You Up — Rick Astley (Official Music Video)"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <button id="playBtn" aria-controls="rickroll">Play "Never Gonna Give You Up"</button>
+
+  <p class="note">
+    If the video doesn't start automatically, click the Play button above. Many browsers block autoplay unless the user interacts with the page.
+  </p>
+
+  <script>
+    // When user clicks the button, reload the iframe with autoplay=1 so playback starts as a result of a user gesture.
+    const iframe = document.getElementById('rickroll');
+    const playBtn = document.getElementById('playBtn');
+
+    playBtn.addEventListener('click', () => {
+      try {
+        const url = new URL(iframe.src);
+        url.searchParams.set('autoplay', '1');
+        // Replace the iframe src (this change is triggered by a user click -> browsers allow autoplay).
+        iframe.src = url.toString();
+        playBtn.disabled = true;
+        playBtn.textContent = 'Playing...';
+      } catch (err) {
+        // Fallback: append autoplay param manually if URL constructor isn't supported.
+        if (!iframe.src.includes('autoplay=1')) {
+          iframe.src = iframe.src + (iframe.src.includes('?') ? '&' : '?') + 'autoplay=1';
+        }
+        playBtn.disabled = true;
+        playBtn.textContent = 'Playing...';
+      }
+    });
+  </script>
 </body>
 </html>
