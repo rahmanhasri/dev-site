@@ -52,44 +52,12 @@
 </head>
 <body>
   <div class="video-wrap" aria-hidden="false">
-    <!-- Official YouTube video ID: dQw4w9WgXcQ -->
-    <iframe
-      id="rickroll"
-      src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
-      title="Never Gonna Give You Up — Rick Astley (Official Music Video)"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
+    <div class="tenor-gif-embed" data-postid="22113173" data-share-method="host" data-aspect-ratio="0.84375" data-width="100%">
+      <a href="https://tenor.com/view/rick-roll-rick-ashley-never-gonna-give-you-up-gif-22113173">Rick Roll Rick Ashley GIF</a>
+      from <a href="https://tenor.com/search/rick+roll-gifs">Rick Roll GIFs</a>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
   </div>
-
-  <button id="playBtn" aria-controls="rickroll">Play "Never Gonna Give You Up"</button>
-
-  <p class="note">
-    If the video doesn't start automatically, click the Play button above. Many browsers block autoplay unless the user interacts with the page.
-  </p>
-
-  <script>
-    // When user clicks the button, reload the iframe with autoplay=1 so playback starts as a result of a user gesture.
-    const iframe = document.getElementById('rickroll');
-    const playBtn = document.getElementById('playBtn');
-
-    playBtn.addEventListener('click', () => {
-      try {
-        const url = new URL(iframe.src);
-        url.searchParams.set('autoplay', '1');
-        // Replace the iframe src (this change is triggered by a user click -> browsers allow autoplay).
-        iframe.src = url.toString();
-        playBtn.disabled = true;
-        playBtn.textContent = 'Playing...';
-      } catch (err) {
-        // Fallback: append autoplay param manually if URL constructor isn't supported.
-        if (!iframe.src.includes('autoplay=1')) {
-          iframe.src = iframe.src + (iframe.src.includes('?') ? '&' : '?') + 'autoplay=1';
-        }
-        playBtn.disabled = true;
-        playBtn.textContent = 'Playing...';
-      }
-    });
-  </script>
+  
 </body>
 </html>
